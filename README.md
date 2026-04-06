@@ -1,2 +1,2 @@
-# 2026-topicos-especiais-em-sistemas
-Repositório das aulas de segunda feira de Tópicos Especiais de Sistemas
+# 2026-topicos-especiais-em-sistemas-segunda
+About Repositório com os projetos da disciplina de Tópicos Especiais em Sistemas de segunda-feira de noite.

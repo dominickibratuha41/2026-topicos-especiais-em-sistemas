@@ -1,0 +1,6 @@
+###
+GET http://localhost:5273
+
+###
+GET  http://localhost:5273//api/produto/listar/listarprodutos
+
