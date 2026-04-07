@@ -2,11 +2,11 @@ using System;
 
 namespace API.Models;
 
-public class produto
+public class Produto
 {
     //Atributo, propriedade e característica = C#
 
-    public string Nome { get; set; }
+    public string? Nome { get; set; }
 
 
     //Atributo, propriedade e característica = Java

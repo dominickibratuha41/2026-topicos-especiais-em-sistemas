@@ -2,5 +2,15 @@
 GET http://localhost:5273
 
 ###
-GET  http://localhost:5273//api/produto/listar/listarprodutos
+GET  http://localhost:5273//api/produto/listar
+
+
+###
+POST  http://localhost:5273//api/produto/cadastrar
+Content-Type: application/json
+
+{
+    "nome" : "Mouse",
+}
+
 
