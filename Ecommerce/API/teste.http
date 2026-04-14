@@ -6,11 +6,16 @@ GET  http://localhost:5273//api/produto/listar
 
 
 ###
+GET: http://localhost:5273//api/produto/buscar
+
+###
 POST  http://localhost:5273//api/produto/cadastrar
 Content-Type: application/json
 
 {
     "nome" : "Mouse",
+    "preco" : 7.5
+   
 }
 
 

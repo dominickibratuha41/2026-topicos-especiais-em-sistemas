@@ -1,48 +1,50 @@
-//CONTRUIR A APLICAÇÃO BASE
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
-
-var produtos = new List<Produto>
+// Lista inicializada já com a classe corrigida
+List<Produto> produtos = new List<Produto>
 {
     new Produto { Nome = "Teclado Mecânico RGB" },
-    new Produto { Nome = "Mouse Gamer 12000 DPI" },
-    new Produto { Nome = "Monitor 144Hz" },
-    new Produto { Nome = "Headset 7.1 Surround" },
-    new Produto { Nome = "Cadeira Ergonômica" },
-    new Produto { Nome = "Webcam Full HD" },
-    new Produto { Nome = "Microfone Condensador" },
-    new Produto { Nome = "SSD NVMe 1TB" },
-    new Produto { Nome = "Placa de Vídeo RTX" },
-    new Produto { Nome = "Memória RAM 16GB DDR4" }
-        };
+    new Produto { Nome = "Mouse Gamer 12000 DPI" }
+};
 
-//Endpoints - ADICIONAR FUNCIONALIDADES NA APLICAÇÃO
-//Requisição
-// - URL
-// - Método HTTP
-// - Listar/buscar (Retrive) dados: Método HTTP GET
-// - Cadastrar (Create) dados: Método HTTP GET
 app.MapGet("/", () => "API de Produtos!");
 
-//GET: /api/produto/listar
-app.MapPost("/api/produto/listar", () =>
+app.MapGet("/api/produto/listar", () => 
 {
-    return produtos;
+    return Results.Ok(produtos);
 });
 
-
-//POST: /api/produto/cadastrar
-app.MapPost("/api/produto/cadastrar", (Produto produtos) =>
+app.MapPost("/api/produto/cadastrar", (Produto produto) =>
 {
-    Produtos.Add(Produtos);
+    produtos.Add(produto);
+    return Results.Created($"/api/produto/{produto.Id}", produto);
 });
 
+// GET: /api/produto/buscar/{id}
+app.MapGet("/api/produto/buscar/{id}", (string id) =>
+{
+    foreach (Produto produtoCadastrado in produtos)
+    {
+        if (produtoCadastrado.Id == id)
+        {
+            return Results.Ok(produtoCadastrado);
+        }
+    }
+    // CORREÇÃO: Adicionado o ';' que faltava
+    return Results.NotFound("Produto não encontrado!");
+});
 
-//RODAR A APLICAÇÃO
 app.Run();
 
+// CORREÇÃO: A classe precisa ter o Id e o construtor para gerar o Guid
 public class Produto 
 {
+    public string Id { get; set; }
     public string? Nome { get; set; }
+
+    public Produto()
+    {
+        Id = Guid.NewGuid().ToString();
+    }
 }
