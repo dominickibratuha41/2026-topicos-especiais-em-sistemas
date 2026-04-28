@@ -1,4 +1,5 @@
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<AppDataContext>();
 var app = builder.Build();
 
 // Lista inicializada já com a classe corrigida
@@ -10,8 +11,12 @@ List<Produto> produtos = new List<Produto>
 
 app.MapGet("/", () => "API de Produtos!");
 
-app.MapGet("/api/produto/listar", () => 
+app.MapGet("/api/produto/listar", ([FromServices] AppDataContext ctx) => 
 {
+    if (ctx.Produtos.Any())
+    {
+        return Results.Ok(ctx.Produtos.ToList());
+    }
     return Results.Ok(produtos);
 });
 
